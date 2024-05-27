@@ -18,7 +18,7 @@ func TestSign(t *testing.T) {
 
 func TestNewSigningContext(t *testing.T) {
 	randomKeyStore := RandomKeyStoreForTest().(*MemoryX509KeyStore)
-	ctx, err := NewSigningContext(randomKeyStore.privateKey, [][]byte{randomKeyStore.cert})
+	ctx, err := NewSigningContext(randomKeyStore.PrivateKey, [][]byte{randomKeyStore.Cert})
 	require.NoError(t, err)
 	testSignWithContext(t, ctx, RSASHA256SignatureMethod, crypto.SHA256)
 }
@@ -141,7 +141,7 @@ func TestSignNonDefaultID(t *testing.T) {
 func TestIncompatibleSignatureMethods(t *testing.T) {
 	// RSA
 	randomKeyStore := RandomKeyStoreForTest().(*MemoryX509KeyStore)
-	ctx, err := NewSigningContext(randomKeyStore.privateKey, [][]byte{randomKeyStore.cert})
+	ctx, err := NewSigningContext(randomKeyStore.PrivateKey, [][]byte{randomKeyStore.Cert})
 	require.NoError(t, err)
 
 	err = ctx.SetSignatureMethod(ECDSASHA512SignatureMethod)

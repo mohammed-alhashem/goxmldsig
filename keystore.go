@@ -29,12 +29,12 @@ func (mX509cs *MemoryX509CertificateStore) Certificates() ([]*x509.Certificate, 
 }
 
 type MemoryX509KeyStore struct {
-	privateKey *rsa.PrivateKey
-	cert       []byte
+	PrivateKey *rsa.PrivateKey
+	Cert       []byte
 }
 
 func (ks *MemoryX509KeyStore) GetKeyPair() (*rsa.PrivateKey, []byte, error) {
-	return ks.privateKey, ks.cert, nil
+	return ks.PrivateKey, ks.Cert, nil
 }
 
 func RandomKeyStoreForTest() X509KeyStore {
@@ -61,7 +61,7 @@ func RandomKeyStoreForTest() X509KeyStore {
 	}
 
 	return &MemoryX509KeyStore{
-		privateKey: key,
-		cert:       cert,
+		PrivateKey: key,
+		Cert:       cert,
 	}
 }
